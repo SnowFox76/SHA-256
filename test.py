@@ -1,27 +1,17 @@
 import numpy as np
 import hashlib
+import random
 
-seed_key = 'This is the key '.encode()
+seed_key = 'This is the key'.encode()
 cipher_key256 = hashlib.sha3_256(seed_key).hexdigest()
-print (cipher_key256)
-
-"""
-How to convert a hash to a seed for Numpy
-"""
-cipher_key256_list = []
-for i in cipher_key256 :
-    cipher_key256_list.append(i)
-print (cipher_key256_list)
-
-for i in cipher_key256 :
-    if i.isdigit() :
-        code = i
-print ('Code: ',code)
-
-np.random.seed(int(code))
-list_loc = np.random.randint(len(cipher_key256_list), size=5)
-print (list_loc)
-
-
-
-#print (cipher_key256)
+print ('1')
+random.seed(cipher_key256)
+numpy_seed = random.randint(0,4294967295)
+print ('2')
+# max_int = 18446744073709551614
+np.random.seed(numpy_seed)
+the_list = np.random.permutation(64000)[:10]
+print (the_list)
+np.random.seed(numpy_seed)
+the_list = np.random.permutation(429496729)[:10]
+print (the_list)
